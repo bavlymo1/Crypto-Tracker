@@ -15,6 +15,7 @@ if (localPropertiesFile.exists()) {
     localProperties.load(FileInputStream(localPropertiesFile))
 }
 
+@Suppress("DEPRECATION")
 android {
     namespace = "com.plcoding.cryptotracker"
     compileSdk = 35 // Changed back to 35
@@ -92,4 +93,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 }
