@@ -24,8 +24,8 @@ fun CoinListScreen(
     onAction: (CoinListAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    LocalContext.current
+    LocalLifecycleOwner.current.lifecycle
 
     if (state.isLoading) {
         Box(

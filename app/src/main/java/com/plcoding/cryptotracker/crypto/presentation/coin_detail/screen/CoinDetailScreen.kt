@@ -3,7 +3,6 @@
 package com.plcoding.cryptotracker.crypto.presentation.coin_detail.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,20 +35,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.cryptotracker.R
-import com.plcoding.cryptotracker.crypto.domain.entities.Coin
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.components.InfoCard
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.components.LineChart
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.model.ChartStyle
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.model.DataPoint
 import com.plcoding.cryptotracker.crypto.presentation.coin_list.CoinListState
-import com.plcoding.cryptotracker.crypto.presentation.model.toCoinUi
 
 import com.plcoding.cryptotracker.crypto.presentation.model.toDisplayableNumber
-import com.plcoding.cryptotracker.ui.theme.CryptoTrackerTheme
 import com.plcoding.cryptotracker.ui.theme.greenBackground
 
 @Composable
@@ -187,25 +182,3 @@ fun CoinDetailScreen(
     }
 }
 
-@PreviewLightDark
-@Composable
-private fun CoinDetailScreenPreview() {
-    CryptoTrackerTheme {
-        CoinDetailScreen(
-            state = CoinListState(
-                selectedCoin = Coin(
-                    id = "bitcoin",
-                    rank = 1,
-                    name = "Bitcoin",
-                    symbol = "BTC",
-                    marketCapUsd = 1241273958896.75,
-                    priceUsd = 62828.15,
-                    changePercentage24h = 0.1
-                ).toCoinUi(),
-            ),
-            modifier = Modifier.background(
-                MaterialTheme.colorScheme.background
-            )
-        )
-    }
-}

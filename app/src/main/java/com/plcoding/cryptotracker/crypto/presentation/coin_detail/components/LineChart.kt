@@ -1,7 +1,6 @@
 package com.plcoding.cryptotracker.crypto.presentation.coin_detail.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -24,18 +23,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.plcoding.cryptotracker.crypto.domain.entities.CoinPrice
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.model.ChartStyle
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.model.DataPoint
 import com.plcoding.cryptotracker.crypto.presentation.coin_detail.model.ValueLabel
-import com.plcoding.cryptotracker.ui.theme.CryptoTrackerTheme
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
-import kotlin.random.Random
 
 @Composable
 fun LineChart(
@@ -345,54 +336,5 @@ private fun getSelectedDataPointIndex(
     val triggerRangeRight = touchOffsetX + triggerWidth / 2f
     return drawPoints.indexOfFirst {
         it.x in triggerRangeLeft..triggerRangeRight
-    }
-}
-
-@Preview(widthDp = 1000)
-@Composable
-private fun LineChartPreview() {
-    CryptoTrackerTheme {
-        val coinHistoryRandomized = remember {
-            (1..20).map {
-                CoinPrice(
-                    priceUsd = Random.nextFloat() * 1000.0,
-                    dateTime = ZonedDateTime.now().plusHours(it.toLong())
-                )
-            }
-        }
-        val style = ChartStyle(
-            chartLineColor = Color.Black,
-            unselectedColor = Color(0xFF7C7C7C),
-            selectedColor = Color.Black,
-            helperLineThicknessPx = 1f,
-            axisLineThicknessPx = 5f,
-            labelFontSize = 14.sp,
-            minimumYLabelSpacing = 25.dp,
-            verticalPadding = 8.dp,
-            horizontalPadding = 8.dp,
-            xAxisLabelSpacing = 8.dp
-        )
-        val dataPoints = remember {
-            coinHistoryRandomized.map {
-                DataPoint(
-                    x = it.dateTime.hour.toFloat(),
-                    y = it.priceUsd.toFloat(),
-                    xlabel = DateTimeFormatter
-                        .ofPattern("ha\nM/d")
-                        .format(it.dateTime)
-                )
-            }
-        }
-        LineChart(
-            dataPoints = dataPoints,
-            style = style,
-            visibleDataPointsIndices = 0..19,
-            unit = "$",
-            modifier = Modifier
-                .width(700.dp)
-                .height(300.dp)
-                .background(Color.White),
-            selectedDataPoint = dataPoints[1]
-        )
     }
 }

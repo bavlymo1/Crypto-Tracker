@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.text.toFloat
 
 class CoinListViewModel(
     private val coinDataSource: CoinDataSource

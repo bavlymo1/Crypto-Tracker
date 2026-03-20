@@ -28,7 +28,7 @@ val SpaceMono = FontFamily(
         weight = FontWeight.Bold,
         style = FontStyle.Italic
     ),
-)
+)!!
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -58,4 +58,4 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp
     )
-)
+)!!

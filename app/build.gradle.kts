@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 import java.io.FileInputStream
 
@@ -10,15 +11,15 @@ plugins {
 
 // --- FIX 1: Paste the Key Loading Code HERE (Between plugins and android) ---
 val localProperties = Properties()
-val localPropertiesFile = rootProject.file("local.properties")
-if (localPropertiesFile.exists()) {
+val localPropertiesFile: File? = rootProject.file("local.properties")
+if (localPropertiesFile?.exists() == true) {
     localProperties.load(FileInputStream(localPropertiesFile))
 }
 
 @Suppress("DEPRECATION")
 android {
     namespace = "com.plcoding.cryptotracker"
-    compileSdk = 35 // Changed back to 35
+    compileSdk = 36 // Changed back to 35
 
     defaultConfig {
         applicationId = "com.plcoding.cryptotracker"
@@ -58,7 +59,7 @@ android {
     // New code (use this):
     kotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
     buildFeatures {
@@ -79,6 +80,7 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.androidx.compose.adaptive)
     debugImplementation(libs.bundles.compose.debug)
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
@@ -94,5 +96,6 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
+    androidTestImplementation(libs.leakcanary.android.instrumentation)
+    debugImplementation(libs.leakcanary.android)
 }
